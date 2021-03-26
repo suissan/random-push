@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.my-3
+    if !texts.length
+      h1.my-3 追加されたものがありません
+    else
+      h1.my-3 現在 #{texts.length}件 追加されています
+      div.alert.alert-warning.role.alert
+        h2 危険な変更（削除ボタンは確認アラートが出ません）
+      h3.my-3 全て削除する
+        - let text = texts.join("")
+        form(method="post", action=`/questions/lists/${text}?delete=all`)
+          input(type="hidden" name="_csrf" value!=csrfToken)
+          button(type="submit").btn.btn-danger.my-3 追加したもの全て削除する
+      each text in texts
+        div.card
+          div.card-body
+            h3 #{text}
+          div.card-footer
+            form(method="post", action=`/questions/lists/${text}?delete=1`)
+              input(type="hidden" name="_csrf" value!=csrfToken)
+              button(type="submit").btn.btn-danger 削除
+        br
+    p.to-top ⇧

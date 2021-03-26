@@ -1,5 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.my-3
+    h1 追加したい文字列を入力してください
+    form(method="post" action="/questions")
+      input(type="hidden" name="_csrf" value!=csrfToken)
+      div.form-group
+        textarea(type="text" name="str" cols="30" rows="5" placeholder="改行は入力しないでください" required).form-control
+      div.form-group
+        button(type="submit").btn.btn-primary.my-3 追加
+    h3.my-3 ランダム表示
+    button#random-push.btn.btn-secondary.my-3 表示
+    h1#random-text
+    h3.my-3 表示状態をリセット
+    form(method="post" action="/questions/?reset=string")
+      input(type="hidden" name="_csrf" value!=csrfToken)
+      button(type="submit").btn.btn-warning.my-3 リセット
