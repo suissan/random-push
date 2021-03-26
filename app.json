@@ -1,0 +1,7 @@
+{
+  "name": "random-push",
+  "description": "半自動IOくん",
+  "logo": "",
+  "keywords": ["node"],
+  "image": "heroku/nodejs"
+}
